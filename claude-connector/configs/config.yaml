@@ -1,0 +1,29 @@
+# Claude Connector 配置文件
+
+# 服务器配置
+server:
+  # WebSocket 服务地址
+  url: "ws://localhost:8080/ws/connector"
+  # 认证令牌（请替换为实际的令牌）
+  token: "proshine"
+
+# Claude 配置
+claude:
+  # Claude 命令路径，默认从 PATH 中查找
+  command: "claude"
+  # 命令执行超时时间（秒）
+  timeout: 300
+
+# 客户端配置
+client:
+  # 客户端唯一标识
+  id: "connector-001"
+  # 客户端显示名称
+  name: "开发环境 Claude Connector"
+
+# 日志配置
+log:
+  # 日志级别: debug, info, warn, error
+  level: "info"
+  # 日志文件路径
+  file: "logs/claude-connector.log"
