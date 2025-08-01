@@ -31,4 +31,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     
     @Query("SELECT u FROM User u WHERE u.userRole = :role")
     Page<User> findByUserRole(@Param("role") String role, Pageable pageable);
+    
+    @Query("SELECT COUNT(u) FROM User u WHERE u.userRole = :role")
+    long countByUserRole(@Param("role") String role);
 }
