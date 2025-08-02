@@ -2,33 +2,33 @@ package com.proshine.claudeplatformbackend.exception;
 
 public class BusinessException extends RuntimeException {
     
-    private String code;
+    private Integer code;
     
     public BusinessException(String message) {
         super(message);
-        this.code = "BUSINESS_ERROR";
+        this.code = 400;
     }
     
-    public BusinessException(String code, String message) {
+    public BusinessException(Integer code, String message) {
         super(message);
         this.code = code;
     }
     
     public BusinessException(String message, Throwable cause) {
         super(message, cause);
-        this.code = "BUSINESS_ERROR";
+        this.code = 400;
     }
     
-    public BusinessException(String code, String message, Throwable cause) {
+    public BusinessException(Integer code, String message, Throwable cause) {
         super(message, cause);
         this.code = code;
     }
     
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
     
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 }

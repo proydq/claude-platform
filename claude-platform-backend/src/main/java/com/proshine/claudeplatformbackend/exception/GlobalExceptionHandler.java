@@ -29,25 +29,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ApiResponse<Void>> handleUnauthorizedException(UnauthorizedException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error(e.getMessage(), "UNAUTHORIZED"));
+                .body(ApiResponse.error(e.getMessage(), 401));
     }
     
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiResponse<Void>> handleAuthenticationException(AuthenticationException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error("认证失败: " + e.getMessage(), "AUTHENTICATION_FAILED"));
+                .body(ApiResponse.error("认证失败: " + e.getMessage(), 401));
     }
     
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Void>> handleBadCredentialsException(BadCredentialsException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error("用户名或密码错误", "BAD_CREDENTIALS"));
+                .body(ApiResponse.error("用户名或密码错误", 401));
     }
     
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Void>> handleAccessDeniedException(AccessDeniedException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(ApiResponse.error("权限不足: " + e.getMessage(), "ACCESS_DENIED"));
+                .body(ApiResponse.error("权限不足: " + e.getMessage(), 403));
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
             message.append(error.getField()).append(" ").append(error.getDefaultMessage()).append("; ");
         }
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error(message.toString(), "VALIDATION_ERROR"));
+                .body(ApiResponse.error(message.toString(), 400));
     }
     
     @ExceptionHandler(BindException.class)
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
             message.append(error.getField()).append(" ").append(error.getDefaultMessage()).append("; ");
         }
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error(message.toString(), "BIND_ERROR"));
+                .body(ApiResponse.error(message.toString(), 400));
     }
     
     @ExceptionHandler(ConstraintViolationException.class)
@@ -78,19 +78,19 @@ public class GlobalExceptionHandler {
             message.append(violation.getPropertyPath()).append(" ").append(violation.getMessage()).append("; ");
         }
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error(message.toString(), "CONSTRAINT_VIOLATION"));
+                .body(ApiResponse.error(message.toString(), 400));
     }
     
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<ApiResponse<Void>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("文件大小超出限制", "FILE_SIZE_EXCEEDED"));
+                .body(ApiResponse.error("文件大小超出限制", 413));
     }
     
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("参数错误: " + e.getMessage(), "ILLEGAL_ARGUMENT"));
+                .body(ApiResponse.error("参数错误: " + e.getMessage(), 400));
     }
     
     @ExceptionHandler(RuntimeException.class)
@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
         System.err.println("运行时异常: " + request.getRequestURI() + " - " + e.getMessage());
         e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("服务器内部错误: " + e.getMessage(), "RUNTIME_ERROR"));
+                .body(ApiResponse.error("服务器内部错误: " + e.getMessage(), 500));
     }
     
     @ExceptionHandler(Exception.class)
@@ -106,6 +106,6 @@ public class GlobalExceptionHandler {
         System.err.println("未处理异常: " + request.getRequestURI() + " - " + e.getMessage());
         e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("服务器内部错误", "INTERNAL_SERVER_ERROR"));
+                .body(ApiResponse.error("服务器内部错误", 500));
     }
 }
