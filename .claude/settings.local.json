@@ -16,7 +16,8 @@
       "Bash(wmic process where processid=17512 delete:*)",
       "Bash(java:*)",
       "Bash(wmic process where:*)",
-      "Bash(start /B java:*)"
+      "Bash(start /B java:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

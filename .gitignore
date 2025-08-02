@@ -1,0 +1,26 @@
+# 前端构建和依赖目录
+claude-platform-frontend/dist/
+claude-platform-frontend/node_modules/
+
+# 后端构建目录
+claude-platform-backend/target/
+claude-platform-backend/backend.log
+
+# Go 构建目录
+claude-connector/logs/
+claude-connector/temp/
+
+# IDE 文件
+.idea/
+.vscode/
+*.iml
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 临时文档
+docs/*.log
